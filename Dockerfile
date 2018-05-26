@@ -1,12 +1,7 @@
+# hadolint ignore=DL3007
 FROM node:latest
-LABEL maintainer="https://github.com/4x0v7"
-
-# Install app dependencies
-COPY package.json /src/package.json
-WORKDIR /src
-RUN set -ex; \
-    npm install \
-    && npm ls
-# Bundle app source
-COPY . /src
-RUN npm test
+LABEL maintainer="4x0v7"
+# hadolint ignore=DL3016
+RUN npm install -g markdown-link-check
+WORKDIR /app
+ENTRYPOINT [ "markdown-link-check" ]
